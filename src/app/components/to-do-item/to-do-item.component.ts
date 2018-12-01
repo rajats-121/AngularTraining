@@ -24,7 +24,7 @@ export class ToDoItemComponent implements OnInit {
   onPrioDownBtnClick() {
     this.onPrioDown.emit();
   }
-  
+
   onToggleStatsBtnClick() {
     this.onToggleStatus.emit();
   }

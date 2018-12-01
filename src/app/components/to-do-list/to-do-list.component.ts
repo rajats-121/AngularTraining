@@ -9,8 +9,8 @@ import { TodoService } from 'src/app/services/todo.service';
   styleUrls: ['./to-do-list.component.css']
 })
 export class ToDoListComponent implements OnInit {
-  todos : ToDo [];
-  statistics : Statistics;
+  todos: ToDo[];
+  statistics: Statistics;
 
   constructor(private todoService: TodoService) { }
 
@@ -18,15 +18,16 @@ export class ToDoListComponent implements OnInit {
 
     this.todos = this.todoService.getTodos();
     let stats = new Statistics();
-    this.todos.forEach((todo)=>{
-        stats.total++; 
-        if(todo.done) 
+    this.todos.forEach((todo) => {
+      stats.total++;
+      if (todo.done)
         stats.done++;
-        else
-        stats.undone++});
+      else
+        stats.undone++
+    });
     this.statistics = stats;
   }
-  
+
   increasePrio(todo: ToDo): void {
     this.todoService.increasePrio(todo);
   }
@@ -36,13 +37,13 @@ export class ToDoListComponent implements OnInit {
   }
 
   toggleStatus(todo): void {
-    if(todo.done === true) {
+    if (todo.done === true) {
       todo.done = false;
       this.statistics.undone++;
       this.statistics.done--;
       this.statistics.total = this.statistics.done + this.statistics.undone;
     }
-    else if(todo.done === false) {
+    else if (todo.done === false) {
       todo.done = true;
       this.statistics.done++;
       this.statistics.undone--;

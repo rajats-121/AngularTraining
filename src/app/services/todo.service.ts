@@ -5,8 +5,8 @@ import { ToDo } from '../models/todo';
   providedIn: 'root'
 })
 export class TodoService {
-private todos: ToDo[];
-  constructor() { 
+  private todos: ToDo[];
+  constructor() {
     this.todos = [
       new ToDo(
         'Bring Milk',
@@ -36,13 +36,13 @@ private todos: ToDo[];
   }
 
   increasePrio(todo: ToDo): void {
-    if (todo.priority<5)
-    todo.priority++;
+    if (todo.priority < 5)
+      todo.priority++;
   }
 
   decreasePrio(todo: ToDo): void {
-    if (todo.priority>1)
-    todo.priority--;
+    if (todo.priority > 1)
+      todo.priority--;
   }
 
 }
