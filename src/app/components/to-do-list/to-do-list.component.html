@@ -1,5 +1,7 @@
-<statistics [statistics]="statistics"></statistics>
 
+
+<statistics [statistics]="statistics"></statistics>
+<add-new-task (saveBtnClick)="addTask($event)"></add-new-task>
 <div *ngFor= "let todo of todos">
   <to-do-item
     [todo] = "todo"

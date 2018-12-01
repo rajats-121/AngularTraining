@@ -1,0 +1,36 @@
+<form #addNewTaskForm="ngForm" (ngSubmit)="handleSaveBtnClick();addNewTaskForm.reset()">
+  <div>
+    <div>
+      <label>Task Details: </label>
+      <input type="text" name="label" [(ngModel)]="newTodo.label" #label="ngModel" required minlength="5">
+    </div>
+    <div *ngIf="label.invalid && (label.touched || label.dirty)">
+      <div *ngIf="label.errors.required" class="error">
+        Label is required
+      </div>
+    </div>
+    <div *ngIf="label.invalid && (label.touched || label.dirty)">
+      <div *ngIf="label.errors.required" class="error">
+        Minimum Length is 5 characters
+      </div>
+    </div>
+    <div>
+      <label>Task Priority: </label>
+      <select name="priority" [(ngModel)]="newTodo.priority" #priority="ngModel" required >
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+        <option>5</option>
+      </select>
+    </div>
+    <div>
+      <div *ngIf="priority.invalid && (priority.touched || priority.dirty)">
+          <div *ngIf="priority.errors.required" class="error">
+            Priority is required
+          </div>
+      </div>
+    </div>
+    <button type="submit" [disabled]="addNewTaskForm.invalid">Save</button>
+  </div>
+</form>

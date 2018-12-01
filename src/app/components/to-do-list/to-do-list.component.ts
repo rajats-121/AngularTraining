@@ -36,7 +36,7 @@ export class ToDoListComponent implements OnInit {
     this.todoService.decreasePrio(todo);
   }
 
-  toggleStatus(todo): void {
+  toggleStatus(todo: ToDo): void {
     if (todo.done === true) {
       todo.done = false;
       this.statistics.undone++;
@@ -49,5 +49,9 @@ export class ToDoListComponent implements OnInit {
       this.statistics.undone--;
       this.statistics.total = this.statistics.done + this.statistics.undone;
     }
+  }
+
+  addTask(todo: ToDo) {
+    this.todoService.addTask(todo);
   }
 }

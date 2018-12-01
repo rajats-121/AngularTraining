@@ -2,7 +2,7 @@ export class ToDo {
     id: number;
     label: string;
     priority: number;
-    done: boolean;
+    done: boolean = false;
 
     constructor(label, priority, done) {
         this.label = label;

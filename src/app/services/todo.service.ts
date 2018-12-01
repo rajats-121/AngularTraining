@@ -45,4 +45,7 @@ export class TodoService {
       todo.priority--;
   }
 
+  addTask(todo: ToDo) {
+    this.todos.unshift(todo);
+  }
 }
