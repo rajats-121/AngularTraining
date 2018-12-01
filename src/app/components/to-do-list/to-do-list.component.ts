@@ -17,15 +17,7 @@ export class ToDoListComponent implements OnInit {
   ngOnInit() {
 
     this.todos = this.todoService.getTodos();
-    let stats = new Statistics();
-    this.todos.forEach((todo) => {
-      stats.total++;
-      if (todo.done)
-        stats.done++;
-      else
-        stats.undone++
-    });
-    this.statistics = stats;
+    this.statistics = this.todoService.getStats();
   }
 
   increasePrio(todo: ToDo): void {
@@ -53,5 +45,6 @@ export class ToDoListComponent implements OnInit {
 
   addTask(todo: ToDo) {
     this.todoService.addTask(todo);
+    this.statistics = this.todoService.getStats();
   }
 }

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ToDo } from '../models/todo';
+import { Statistics } from '../models/statistics';
 
 @Injectable({
   providedIn: 'root'
@@ -47,5 +48,17 @@ export class TodoService {
 
   addTask(todo: ToDo) {
     this.todos.unshift(todo);
+  }
+
+  getStats(): Statistics {
+    let stats = new Statistics();
+    this.todos.forEach((todo) => {
+      stats.total++;
+      if (todo.done)
+        stats.done++;
+      else
+        stats.undone++;
+    });
+    return stats;
   }
 }
