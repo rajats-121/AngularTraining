@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ToDo } from '../models/todo';
-import { Statistics } from '../models/statistics';
+import { ToDo } from '../../models/todo';
+import { Statistics } from '../../models/statistics';
+import { TodoService } from 'src/app/services/todo.service';
 
 @Component({
   selector: 'to-do-list',
@@ -11,31 +12,11 @@ export class ToDoListComponent implements OnInit {
   todos : ToDo [];
   statistics : Statistics;
 
-  constructor() { }
+  constructor(private todoService: TodoService) { }
 
   ngOnInit() {
-    this.todos = [
-      new ToDo(
-        'Bring Milk',
-        '1',
-        false
-      ),
-      new ToDo(
-        'Study',
-        '4',
-        false
-      ),
-      new ToDo(
-        'Meet friends',
-        '2',
-        false
-      ),
-      new ToDo(
-        'Sleep',
-        '4',
-        false
-      ),
-    ];
+
+    this.todos = this.todoService.getTodos();
     let stats = new Statistics();
     this.todos.forEach((todo)=>{
         stats.total++; 
@@ -45,15 +26,13 @@ export class ToDoListComponent implements OnInit {
         stats.undone++});
     this.statistics = stats;
   }
-
+  
   increasePrio(todo: ToDo): void {
-    if (todo.priority<5)
-    todo.priority++;
+    this.todoService.increasePrio(todo);
   }
 
   decreasePrio(todo: ToDo): void {
-    if (todo.priority>1)
-    todo.priority--;
+    this.todoService.decreasePrio(todo);
   }
 
   toggleStatus(todo): void {

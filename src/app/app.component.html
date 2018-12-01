@@ -1,1 +1,4 @@
-<to-do-list></to-do-list>
+<h2>To Do World</h2>
+<button (click)="showToDoList = !showToDoList">Show/Hide</button>
+
+<to-do-list *ngIf="showToDoList"></to-do-list>
