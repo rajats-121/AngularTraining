@@ -1,53 +1,37 @@
 import { Injectable } from '@angular/core';
 import { ToDo } from '../models/todo';
 import { Statistics } from '../models/statistics';
+import { Http } from '@angular/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TodoService {
-  private todos: ToDo[];
-  constructor() {
-    this.todos = [
-      new ToDo(
-        'Bring Milk',
-        '1',
-        false
-      ),
-      new ToDo(
-        'Study',
-        '4',
-        false
-      ),
-      new ToDo(
-        'Meet friends',
-        '2',
-        false
-      ),
-      new ToDo(
-        'Sleep',
-        '4',
-        false
-      ),
-    ];
+  private todos: ToDo[] = [];
+  private url = 'http://localhost:3000/todos';
+
+  constructor(private http: Http) {}
+
+  getTodos() {
+    return this.http.get(this.url);
   }
 
-  getTodos(): ToDo[] {
-    return this.todos;
-  }
-
-  increasePrio(todo: ToDo): void {
-    if (todo.priority < 5)
+  increasePrio(todo: ToDo) {
+    if (todo.priority < 5) {
       todo.priority++;
+      return this.http.put(this.url + '/' + todo.id, todo);
+    }
   }
 
-  decreasePrio(todo: ToDo): void {
-    if (todo.priority > 1)
+  decreasePrio(todo: ToDo) {
+    if (todo.priority > 1) {
       todo.priority--;
+      return this.http.put(this.url + '/' + todo.id, todo);
+    }
   }
 
   addTask(todo: ToDo) {
-    this.todos.unshift(todo);
+    return this.http.post(this.url, todo);
   }
 
   getStats(): Statistics {

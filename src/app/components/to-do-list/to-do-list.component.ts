@@ -12,20 +12,19 @@ export class ToDoListComponent implements OnInit {
   todos: ToDo[];
   statistics: Statistics;
 
-  constructor(private todoService: TodoService) { }
+  constructor(private todoService: TodoService,) { }
 
   ngOnInit() {
-
-    this.todos = this.todoService.getTodos();
+    this.todoService.getTodos().subscribe(res => this.todos = res.json(), err => console.log(err));
     this.statistics = this.todoService.getStats();
   }
 
   increasePrio(todo: ToDo): void {
-    this.todoService.increasePrio(todo);
+    this.todoService.increasePrio(todo).subscribe();
   }
 
   decreasePrio(todo: ToDo): void {
-    this.todoService.decreasePrio(todo);
+    this.todoService.decreasePrio(todo).subscribe();
   }
 
   toggleStatus(todo: ToDo): void {
@@ -44,7 +43,9 @@ export class ToDoListComponent implements OnInit {
   }
 
   addTask(todo: ToDo) {
-    this.todoService.addTask(todo);
+    this.todoService
+      .addTask(todo)
+      .subscribe(res => this.todos.push(res.json()));
     this.statistics = this.todoService.getStats();
   }
 }
