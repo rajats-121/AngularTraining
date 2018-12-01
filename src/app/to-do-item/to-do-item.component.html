@@ -1,0 +1,9 @@
+<div  [class.high]="todo.priority>3">
+    <div class="label">{{ todo.label }}</div>  
+    <div class="priority">{{ todo.priority }}</div>
+    <button (click)="onPrioUpBtnClick()">&uarr;</button>
+    <button (click)="onPrioDownBtnClick()">&darr;</button>
+    <div *ngIf="todo.done === false"><button (click)="onToggleStatsBtnClick()" type="button" class="btn btn-success">Mark Done</button></div>
+    <div *ngIf="todo.done === true"><button (click)="onToggleStatsBtnClick()" type="button" class="btn btn-danger">Mark Undone</button></div>  
+    <hr>    
+</div>

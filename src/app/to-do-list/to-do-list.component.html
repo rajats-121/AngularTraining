@@ -1,0 +1,10 @@
+<statistics [statistics]="statistics"></statistics>
+
+<div *ngFor= "let todo of todos">
+  <to-do-item
+    [todo] = "todo"
+    (onPrioUp) = "increasePrio(todo)"
+    (onPrioDown) = "decreasePrio(todo)"
+    (onToggleStatus) = "toggleStatus(todo)" >
+  </to-do-item>
+</div>
